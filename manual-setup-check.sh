@@ -59,28 +59,28 @@ delimiter
 
 ## 5. git
 # https://stackoverflow.com/questions/12254076/how-do-i-show-my-global-git-config
-print_table_results "Installed git" "git version | grep -q 'git version'"
-print_table_results "Github user config" "git config --list | grep -q 'github.user='"
-print_table_results "Github email config" "git config --list | grep -q 'github.email='"
+print_table_results "Installed git" "command -v git >/dev/null 2>&1 && git version | grep -q 'git version'"
+print_table_results "Github user config" "command -v git >/dev/null 2>&1 && git config --list | grep -q 'github.user='"
+print_table_results "Github email config" "command -v git >/dev/null 2>&1 && git config --list | grep -q 'github.email='"
 delimiter
-print_data_row "github.user" "git config --list | grep 'github.user=' | sed 's/github.user=//g'"
-print_data_row "github.email" "git config --list | grep 'github.email=' | sed 's/github.email=//g'"
+print_data_row "github.user" "command -v git >/dev/null 2>&1 && git config --list | grep 'github.user=' | sed 's/github.user=//g'"
+print_data_row "github.email" "command -v git >/dev/null 2>&1 && git config --list | grep 'github.email=' | sed 's/github.email=//g'"
 delimiter
 
 ## 6. Support Libraries
-print_table_results "Installed gmp" "brew list | grep -q 'gmp'"
-print_table_results "Installed gnupg" "brew list | grep -q 'gnupg'"
+print_table_results "Installed gmp" "command -v brew >/dev/null 2>&1 && brew list | grep -q 'gmp'"
+print_table_results "Installed gnupg" "command -v brew >/dev/null 2>&1 && brew list | grep -q 'gnupg'"
 delimiter
 
 ## 7. Ruby Version Manager (rvm)
 print_table_results "Installed RVM" "command -v rvm >/dev/null 2>&1 && which rvm | grep -q '/Users/.*/\.rvm/bin/rvm'"
-print_table_results "Default RVM (2.3.3)" "rvm list | grep -Fq '=* ruby-2.3.3 [ x86_64 ]'"
-print_table_results "Test RVM PATH" "rvm list | grep -Fqv 'Warning! PATH'"
+print_table_results "Default RVM (2.3.3)" "command -v rvm >/dev/null 2>&1 && rvm list | grep -Fq '=* ruby-2.3.3 [ x86_64 ]'"
+print_table_results "Test RVM PATH" "command -v rvm >/dev/null 2>&1 && rvm list | grep -Fqv 'Warning! PATH'"
 delimiter
 
 ## 8. Gems
-print_table_results "Gem: learn-co" "gem list | grep -q 'learn-co'"
-print_table_results "Gem: bundler" "gem list | grep -q 'bundler'"
+print_table_results "Gem: learn-co" "command -v gem >/dev/null 2>&1 && gem list | grep -q 'learn-co'"
+print_table_results "Gem: bundler" "command -v gem >/dev/null 2>&1 && gem list | grep -q 'bundler'"
 delimiter
 
 ## 9. Learn
@@ -88,45 +88,45 @@ learn whoami | grep 'Name:\|Username:\|Email:'
 delimiter
 
 ## 10. Atom
-print_table_results "Installed Atom" "atom -v | grep -q 'Atom'"
+print_table_results "Installed Atom" "command -v atom >/dev/null 2>&1 && atom -v | grep -q 'Atom'"
 print_table_results "Learn Editor" "cat ~/.learn-config | grep ':editor:' | grep -q 'atom'"
 delimiter
 
 ## 11. Gems (more)
-print_table_results "Gem: phantomjs" "gem list | grep -q 'phantomjs'"
-print_table_results "Gem: nokogiri" "gem list | grep -q 'nokogiri'"
+print_table_results "Gem: phantomjs" "command -v gem >/dev/null 2>&1 && gem list | grep -q 'phantomjs'"
+print_table_results "Gem: nokogiri" "command -v gem >/dev/null 2>&1 && gem list | grep -q 'nokogiri'"
 delimiter
 
 ## 12. Databases
 print_table_results "Installed sqlite" "command -v sqlite3 >/dev/null 2>&1"
-print_table_results "Installed PostgreSQL" "postgres --version | grep -q 'postgres (PostgreSQL)'"
-print_table_results "Installed psql" "psql --version | grep -q 'psql (PostgreSQL)'"
+print_table_results "Installed PostgreSQL" "command -v postgres >/dev/null 2>&1 && postgres --version | grep -q 'postgres (PostgreSQL)'"
+print_table_results "Installed psql" "command -v psql >/dev/null 2>&1 && psql --version | grep -q 'psql (PostgreSQL)'"
 delimiter
 
 ## 13. Rails
-print_table_results "Installed Rails" "rails --version | grep -q 'Rails'"
-print_table_results "Gem: rails" "gem list | grep -q 'rails'"
+print_table_results "Installed Rails" "command -v rails >/dev/null 2>&1 && rails --version | grep -q 'Rails'"
+print_table_results "Gem: rails" "command -v gem >/dev/null 2>&1 && gem list | grep -q 'rails'"
 delimiter
 
 ## 14. Node Version Manager (nvm)
 # https://unix.stackexchange.com/questions/184508/nvm-command-not-available-in-bash-script
 # https://stackoverflow.com/questions/39190575/bash-script-for-changing-nvm-node-version
 . ~/.nvm/nvm.sh
-print_table_results "Installed NVM" "nvm --version | grep -q '[0-9]*\.[0-9]*\.[0-9]*'"
+print_table_results "Installed NVM" "command -v nvm >/dev/null 2>&1 && nvm --version | grep -q '[0-9]*\.[0-9]*\.[0-9]*'"
 print_table_results "Installed Node" "command -v node | grep -q '/Users/.*/.nvm/versions/node/v.*/bin/node'"
-print_table_results "Default Node (10.x)" 'nvm version default | grep -q "v10"'
-print_table_results "Default Node (6.11.2)" 'nvm version default | grep -q "v6.11.2"'
+print_table_results "Default Node (10.x)" 'command -v nvm >/dev/null 2>&1 && nvm version default | grep -q "v10"'
+print_table_results "Default Node (6.11.2)" 'command -v nvm >/dev/null 2>&1 && nvm version default | grep -q "v6.11.2"'
 delimiter
 
 ## 15. Java
 # https://stackoverflow.com/questions/36388348/check-if-java-installed-with-bash
-print_table_results "Installed Java" 'java -version 2>&1 >/dev/null | grep -q "java version"'
+print_table_results "Installed Java" 'command -v java >/dev/null 2>&1 && java -version 2>&1 >/dev/null | grep -q "java version"'
 delimiter
 
 ## 16. Google Chrome
-print_table_results "Installed Google Chrome" "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version | grep -q 'Google Chrome'"
+print_table_results "Installed Google Chrome" "[ -f /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome ] && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version | grep -q 'Google Chrome'"
 delimiter
 
 ## 17. Slack
-print_table_results "Installed Slack" "/Applications/Slack.app/Contents/MacOS/Slack --version | grep -q ''"
+print_table_results "Installed Slack" "[ -f /Applications/Slack.app/Contents/MacOS/Slack ] && /Applications/Slack.app/Contents/MacOS/Slack --version | grep -q ''"
 delimiter
