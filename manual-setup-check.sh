@@ -53,7 +53,8 @@ delimiter
 
 ## 4. Homebrew
 # https://stackoverflow.com/questions/21577968/how-to-tell-if-homebrew-is-installed-on-mac-os-x
-print_table_results "Homebrew" "which -s brew"
+# https://stackoverflow.com/questions/592620/how-to-check-if-a-program-exists-from-a-bash-script
+print_table_results "Homebrew" "command -v brew >/dev/null 2>&1"
 delimiter
 
 ## 5. git
@@ -72,7 +73,7 @@ print_table_results "Installed gnupg" "brew list | grep -q 'gnupg'"
 delimiter
 
 ## 7. Ruby Version Manager (rvm)
-print_table_results "Installed RVM" "which rvm | grep -q '/Users/.*/\.rvm/bin/rvm'"
+print_table_results "Installed RVM" "command -v rvm >/dev/null 2>&1 && which rvm | grep -q '/Users/.*/\.rvm/bin/rvm'"
 print_table_results "Default RVM (2.3.3)" "rvm list | grep -Fq '=* ruby-2.3.3 [ x86_64 ]'"
 print_table_results "Test RVM PATH" "rvm list | grep -Fqv 'Warning! PATH'"
 delimiter
@@ -97,7 +98,7 @@ print_table_results "Gem: nokogiri" "gem list | grep -q 'nokogiri'"
 delimiter
 
 ## 12. Databases
-print_table_results "Installed sqlite" "which -s sqlite3"
+print_table_results "Installed sqlite" "command -v sqlite3 >/dev/null 2>&1"
 print_table_results "Installed PostgreSQL" "postgres --version | grep -q 'postgres (PostgreSQL)'"
 print_table_results "Installed psql" "psql --version | grep -q 'psql (PostgreSQL)'"
 delimiter
@@ -112,7 +113,7 @@ delimiter
 # https://stackoverflow.com/questions/39190575/bash-script-for-changing-nvm-node-version
 . ~/.nvm/nvm.sh
 print_table_results "Installed NVM" "nvm --version | grep -q '[0-9]*\.[0-9]*\.[0-9]*'"
-print_table_results "Installed Node" "which node | grep -q '/Users/.*/.nvm/versions/node/v.*/bin/node'"
+print_table_results "Installed Node" "command -v node | grep -q '/Users/.*/.nvm/versions/node/v.*/bin/node'"
 print_table_results "Default Node (10.x)" 'nvm version default | grep -q "v10"'
 print_table_results "Default Node (6.11.2)" 'nvm version default | grep -q "v6.11.2"'
 delimiter
