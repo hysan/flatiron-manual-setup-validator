@@ -1,10 +1,13 @@
 #!/bin/sh
 
+
 # https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
 NC='\033[0m' # No Color
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+
 
 # https://stackoverflow.com/questions/6212219/passing-parameters-to-a-bash-function
 # https://stackoverflow.com/questions/5615717/how-to-store-a-command-in-a-variable-in-linux
@@ -39,8 +42,21 @@ delimiter () {
   printf "${BLUE}******************************************${NC}\n"
 }
 
+validation_header () {
+  printf "\n${CYAN}************ VALIDATING SETUP ************${NC}\n\n"
+}
+
+configuration_header () {
+  printf "\n${CYAN}************* CONFIGURATION **************${NC}\n\n"
+}
+
+
+## Validation
+validation_header
 delimiter
+
 ## 1. Uninstall Learn IDE
+## TODO
 
 ## 2. Install Xcode Command Line Tools
 # https://apple.stackexchange.com/questions/219507/best-way-to-check-in-bash-if-command-line-tools-are-installed
@@ -63,9 +79,6 @@ print_table_results "Installed git" "command -v git >/dev/null 2>&1 && git versi
 print_table_results "Github user config" "command -v git >/dev/null 2>&1 && git config --list | grep -q 'github.user='"
 print_table_results "Github email config" "command -v git >/dev/null 2>&1 && git config --list | grep -q 'github.email='"
 delimiter
-print_data_row "github.user" "command -v git >/dev/null 2>&1 && git config --list | grep 'github.user=' | sed 's/github.user=//g'"
-print_data_row "github.email" "command -v git >/dev/null 2>&1 && git config --list | grep 'github.email=' | sed 's/github.email=//g'"
-delimiter
 
 ## 6. Support Libraries
 print_table_results "Installed gmp" "command -v brew >/dev/null 2>&1 && brew list | grep -q 'gmp'"
@@ -84,8 +97,7 @@ print_table_results "Gem: bundler" "command -v gem >/dev/null 2>&1 && gem list |
 delimiter
 
 ## 9. Learn
-learn whoami | grep 'Name:\|Username:\|Email:'
-delimiter
+## See Student Configuration section.
 
 ## 10. Atom
 print_table_results "Installed Atom" "command -v atom >/dev/null 2>&1 && atom -v | grep -q 'Atom'"
@@ -124,9 +136,29 @@ print_table_results "Installed Java" 'command -v java >/dev/null 2>&1 && java -v
 delimiter
 
 ## 16. Google Chrome
+# https://unix.stackexchange.com/questions/63387/single-command-to-check-if-file-exists-and-print-custom-message-to-stdout
 print_table_results "Installed Google Chrome" "[ -f /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome ] && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version | grep -q 'Google Chrome'"
 delimiter
 
 ## 17. Slack
 print_table_results "Installed Slack" "[ -f /Applications/Slack.app/Contents/MacOS/Slack ] && /Applications/Slack.app/Contents/MacOS/Slack --version | grep -q ''"
+delimiter
+
+
+## Student Configuration
+configuration_header
+delimiter
+
+## 5. git
+echo "Github"
+print_data_row "Username" "command -v git >/dev/null 2>&1 && git config --list | grep 'github.user=' | sed 's/github.user=//g'"
+print_data_row "Email" "command -v git >/dev/null 2>&1 && git config --list | grep 'github.email=' | sed 's/github.email=//g'"
+delimiter
+
+## 9. Learn
+# https://stackoverflow.com/questions/369758/how-to-trim-whitespace-from-a-bash-variable
+echo "Learn"
+print_data_row "Name" "command -v learn >/dev/null 2>&1 && learn whoami | grep 'Name:' | sed 's/Name://g' | sed -e 's/^[[:space:]]*//'"
+print_data_row "Username" "command -v learn >/dev/null 2>&1 && learn whoami | grep 'Username:' | sed 's/Username://g' | sed -e 's/^[[:space:]]*//'"
+print_data_row "Email" "command -v learn >/dev/null 2>&1 && learn whoami | grep 'Email:' | sed 's/Email://g' | sed -e 's/^[[:space:]]*//'"
 delimiter
