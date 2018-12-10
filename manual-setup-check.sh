@@ -152,8 +152,8 @@ delimiter
 
 ## 5. git
 echo "Github"
-print_data_row "Username" "command -v git >/dev/null 2>&1 && git config --list | grep 'github.user=' | sed 's/github.user=//g'"
-print_data_row "Email" "command -v git >/dev/null 2>&1 && git config --list | grep 'github.email=' | sed 's/github.email=//g'"
+print_data_row "Username" "command -v git >/dev/null 2>&1 && git config github.user"
+print_data_row "Email" "command -v git >/dev/null 2>&1 && git config github.email"
 delimiter
 
 ## 9. Learn
