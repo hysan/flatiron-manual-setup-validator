@@ -126,8 +126,9 @@ delimiter
 . ~/.nvm/nvm.sh
 print_table_results "Installed NVM" "command -v nvm >/dev/null 2>&1 && nvm --version | grep -q '[0-9]*\.[0-9]*\.[0-9]*'"
 print_table_results "Installed Node" "command -v node | grep -q '/Users/.*/.nvm/versions/node/v.*/bin/node'"
+print_table_results "Default Node (11.x)" 'command -v nvm >/dev/null 2>&1 && nvm version default | grep -q "v11"'
 # print_table_results "Default Node (10.x)" 'command -v nvm >/dev/null 2>&1 && nvm version default | grep -q "v10"'
-print_table_results "Default Node (6.11.2)" 'command -v nvm >/dev/null 2>&1 && nvm version default | grep -q "v6.11.2"'
+# print_table_results "Default Node (6.11.2)" 'command -v nvm >/dev/null 2>&1 && nvm version default | grep -q "v6.11.2"'
 delimiter
 
 ## 15. Java
